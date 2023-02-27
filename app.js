@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(require("./api/routes/usersClient"));
+app.use(require("./api/skaners-api/routes/usersClient"));
 
 app.use(
   jwt({
