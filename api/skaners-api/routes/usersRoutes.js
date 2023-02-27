@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
-
+const authController = require("../controllers/authController");
 const { users } = require("../../../models");
-console.log(users);
+
+router.post("/signup", authController.signUp);
+router.post("/signin", authController.signIn);
+router.get("/info/:id", authController.userInfo);
+
 router.get("/api/users", async (req, res) => {
   try {
     const usersList = await users.find();

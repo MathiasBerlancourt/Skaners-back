@@ -5,9 +5,7 @@ module.exports = (mongoose, Mongoose) => {
   // This section contains the properties of your model, mapped to your collection's properties.
   // Learn more here: https://docs.forestadmin.com/documentation/reference-guide/models/enrich-your-models#declaring-a-new-field-in-a-model
   const schema = Mongoose.Schema(
-    {
-      email: String,
-    },
+    {},
     {
       timestamps: false,
     }
