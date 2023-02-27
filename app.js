@@ -7,7 +7,7 @@ const cors = require("cors");
 const jwt = require("express-jwt");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const userRoutes = require("./models/users");
+const userRoutes = require("./api/skaners-api/routes/usersRoutes");
 const {
   errorHandler,
   ensureAuthenticated,
