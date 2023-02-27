@@ -4,14 +4,36 @@
 module.exports = (mongoose, Mongoose) => {
   // This section contains the properties of your model, mapped to your collection's properties.
   // Learn more here: https://docs.forestadmin.com/documentation/reference-guide/models/enrich-your-models#declaring-a-new-field-in-a-model
-  const schema = Mongoose.Schema(
-    {
-      email: String,
+  const schema = Mongoose.Schema({
+    username: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 35,
+      unique: true,
     },
-    {
-      timestamps: false,
-    }
-  );
+    email: {
+      type: String,
+      required: true,
+
+      unique: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      maxlength: 300,
+      minlength: 6,
+    },
+    pictureUrl: {
+      type: String,
+      default: "// NO PICTURE HERE \\",
+    },
+    favorites: {
+      default: [],
+      type: Array,
+    },
+  });
 
   return mongoose.model("users", schema, "users");
 };
