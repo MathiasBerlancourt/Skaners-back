@@ -1,4 +1,4 @@
-const { users } = require("../../../models");
+const { users } = require("../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -14,7 +14,7 @@ const createToken = (id) => {
 
 module.exports.signUp = async (req, res) => {
   try {
-    const { username, email, password, url } = req.body;
+    const { username, email, password, pictureUrl } = req.body;
     const saltRounds = 10;
 
     const user = await users.findOne({ email: email, username: username });
@@ -29,7 +29,7 @@ module.exports.signUp = async (req, res) => {
             username,
             email,
             password: hash,
-            pictureUrl: url,
+            pictureUrl,
           });
           const token = createToken(user._id);
 
