@@ -57,14 +57,3 @@ module.exports.signIn = async (req, res) => {
     res.status(401).json({ e });
   }
 };
-module.exports.userInfo = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await users.findById(id);
-    if (user) {
-      res.status(200).json(user);
-    }
-  } catch (e) {
-    res.status(400).json({ message: e.message });
-  }
-};

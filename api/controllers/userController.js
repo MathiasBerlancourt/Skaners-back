@@ -16,3 +16,15 @@ module.exports.updateUser = async (req, res) => {
     throw { message: e };
   }
 };
+
+module.exports.userInfo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await users.findById(id);
+    if (user) {
+      res.status(200).json(user);
+    }
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+};

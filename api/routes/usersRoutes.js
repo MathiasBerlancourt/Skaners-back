@@ -6,8 +6,8 @@ const { users } = require("../../models");
 
 router.post("/signup", authController.signUp);
 router.post("/signin", authController.signIn);
-router.get("/user/info/:id", authController.userInfo);
 
+router.get("/user/info/:id", userController.userInfo);
 router.put("/user/update/:id", userController.updateUser);
 
 router.get("/api/users", async (req, res) => {
