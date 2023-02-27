@@ -33,6 +33,14 @@ module.exports = (mongoose, Mongoose) => {
       default: [],
       type: Array,
     },
+    skans: {
+      default: [],
+      type: Array,
+    },
+    likes: {
+      default: [],
+      type: Array,
+    },
   });
 
   return mongoose.model("users", schema, "users");
