@@ -59,6 +59,21 @@
       "inverseOf": null,
       "validations": []
     }, {
+      "field": "likes",
+      "type": "Json",
+      "defaultValue": [],
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "password",
       "type": "String",
       "defaultValue": null,
@@ -89,6 +104,21 @@
       "field": "pictureUrl",
       "type": "String",
       "defaultValue": "// NO PICTURE HERE \\",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "skans",
+      "type": "Json",
+      "defaultValue": [],
       "enums": null,
       "integration": null,
       "isFilterable": true,

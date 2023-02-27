@@ -6,8 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("express-jwt");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
-const userRoutes = require("./api/skaners-api/routes/usersRoutes");
+const userRoutes = require("./api/routes/usersRoutes");
 const {
   errorHandler,
   ensureAuthenticated,
