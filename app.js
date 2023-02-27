@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("express-jwt");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
+const userRoutes = require("./api/skaners-api/routes/usersRoutes");
 const {
   errorHandler,
   ensureAuthenticated,
@@ -52,7 +54,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(require("./api/routes/usersClient"));
+app.use(userRoutes);
 
 app.use(
   jwt({
