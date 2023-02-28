@@ -17,25 +17,32 @@ module.exports.signUp = async (req, res) => {
     const { username, email, password, pictureUrl } = req.body;
     const saltRounds = 10;
 
-    const user = await users.findOne({ email: email, username: username });
-    if (user) {
-      res
+    const thatUser = await users.findOne({ email: email });
+    if (thatUser) {
+      return res
         .status(409)
-        .json({ message: "This email/username already has an account" });
-    } else {
-      if (username && email && password) {
-        bcrypt.hash(password, saltRounds, async (err, hash) => {
-          const user = await users.create({
-            username,
-            email,
-            password: hash,
-            pictureUrl,
-          });
-          const token = createToken(user._id);
+        .json({ message: "This email already has an account" });
+    }
 
-          res.status(201).json({ user, token });
+    const thisUser = await users.findOne({ username: username });
+    if (thisUser) {
+      return res
+        .status(409)
+        .json({ message: "This username already has an account" });
+    }
+
+    if (username && email && password) {
+      bcrypt.hash(password, saltRounds, async (err, hash) => {
+        const user = await users.create({
+          username,
+          email,
+          password: hash,
+          pictureUrl,
         });
-      }
+
+        const token = createToken(user._id);
+        res.status(201).json({ user, token });
+      });
     }
   } catch (e) {
     res.status(400).json({ message: e.message });
@@ -46,13 +53,17 @@ module.exports.signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await users.findOne({ email });
-    if (user) {
-      const auth = await bcrypt.compare(password, user.password);
-      if (auth) {
-        const token = createToken(user._id);
-        res.status(201).json({ token, user });
-      }
+    if (!user) {
+      res.status(400).json({ message: "Wrong Email/Password " });
+      return;
     }
+    const auth = await bcrypt.compare(password, user.password);
+    if (!auth) {
+      res.status(400).json({ message: "Wrong Email/Password " });
+      return;
+    }
+    const token = createToken(user._id);
+    res.status(201).json({ token, user });
   } catch (e) {
     res.status(401).json({ e });
   }
