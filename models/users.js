@@ -29,7 +29,9 @@ module.exports = (mongoose, Mongoose) => {
       type: String,
       default: "// NO PICTURE HERE \\",
     },
-    favorites: {
+    dateOfBirth: { type: Date },
+
+    sneakers: {
       default: [],
       type: Array,
     },

@@ -1,4 +1,5 @@
 const { users } = require("../../models");
+const { sneakers } = require("../../models");
 const ObjectID = require("mongoose").Types.ObjectId;
 
 //// User Profile Handling \\\\\\\
@@ -54,12 +55,70 @@ module.exports.allUsers = async (req, res) => {
 
 //// Favorites Handling \\\\\\\
 
-module.exports.addFav = async (req, res) => {
+module.exports.addSneaker = async (req, res) => {
   try {
-    const { userId, id, picturePath, title, pictureExt, description } =
-      req.body;
-    if (!userId || !id) {
-      throw new Error({ code: 401, message: "missing params" });
+    const { userId, objectId } = req.body;
+
+    if (!userId || !objectId) {
+      throw "missing params";
     }
-  } catch (e) {}
+    const user = await users.findById(userId);
+    if (!user) {
+      throw `no user found for this id: ${userId}`;
+    }
+    const newFav = await sneakers.findById(objectId);
+    if (!objectId) {
+      throw new Error({ code: 401, message: "This pictuce no longer exist" });
+    }
+
+    /// Problème ici !
+
+    if (objectId) {
+      user.sneakers.map((sneaker) => {
+        if (JSON.stringify(sneaker._id) === JSON.stringify(objectId)) {
+          const error = new Error("already in favs");
+          error.code = 403;
+          throw error;
+        }
+      });
+    }
+    user.sneakers.push(newFav);
+    await user.save();
+    return res
+      .status(200)
+      .json(`${objectId} bas been added to ${user.username} favorites`);
+  } catch (err) {
+    console.log(err.message);
+    res.status(err.code).json({ error: err.message });
+  }
 };
+
+module.exports.removeSneaker = async (req, res) => {
+  try {
+    const { userId, objectId } = req.body;
+    if (!userId || !objectId) {
+      throw "missing params";
+    }
+    const user = await users.findById(userId);
+    console.log(user);
+    if (!user) {
+      throw `no user found for this id`;
+    }
+    const newTab = [...user.sneakers];
+    user.sneakers.map((sneaker, index) => {
+      if (JSON.stringify(sneaker._id) === JSON.stringify(objectId)) {
+        newTab.splice(index, 1);
+      }
+    });
+    console.log(newTab);
+    user.sneakers = newTab;
+    await user.save();
+    return res
+      .status(200)
+      .json(`${objectId} bas been removed from ${user.username} favorites`);
+  } catch (e) {
+    res.status(400).json(e);
+  }
+};
+
+// TODO Error syntax on all routes
