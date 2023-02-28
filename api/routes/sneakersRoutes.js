@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-const data = require("./sneakapi.json");
 const { sneakers } = require("../../models");
 
 router.get("/sneakers", async (req, res) => {
