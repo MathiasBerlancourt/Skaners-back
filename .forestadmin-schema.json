@@ -47,6 +47,87 @@
     "segments": [],
     "actions": []
   }, {
+    "name": "skans",
+    "nameOld": "skans",
+    "icon": null,
+    "integration": null,
+    "isReadOnly": false,
+    "isSearchable": true,
+    "isVirtual": false,
+    "onlyForRelationships": false,
+    "paginationType": "page",
+    "fields": [{
+      "field": "_id",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": true,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "isChecked",
+      "type": "Boolean",
+      "defaultValue": false,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "pictureUrl",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }, {
+      "field": "userId",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": true,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": [{
+        "message": null,
+        "type": "is present",
+        "value": null
+      }]
+    }],
+    "segments": [],
+    "actions": []
+  }, {
     "name": "sneakers",
     "nameOld": "sneakers",
     "icon": null,
@@ -188,8 +269,8 @@
       "validations": []
     }, {
       "field": "adminRank",
-      "type": "Json",
-      "defaultValue": null,
+      "type": "Number",
+      "defaultValue": 0,
       "enums": null,
       "integration": null,
       "isFilterable": true,
@@ -359,7 +440,7 @@
     "stack": {
       "database_type": "MongoDB",
       "engine": "nodejs",
-      "engine_version": "19.6.0",
+      "engine_version": "18.12.1",
       "orm_version": "5.13.16"
     }
   }

@@ -121,4 +121,9 @@ module.exports.removeSneaker = async (req, res) => {
   }
 };
 
+module.exports.addLike = async (req, res) => {};
+module.exports.removeLike = async (req, res) => {};
+module.exports.addSkan = async (req, res) => {};
+module.exports.removeSkan = async (req, res) => {};
+
 // TODO Error syntax on all routes

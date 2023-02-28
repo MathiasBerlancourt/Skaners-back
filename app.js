@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("express-jwt");
 const morgan = require("morgan");
+const skansRoutes = require("./api/routes/skansRoutes");
 const userRoutes = require("./api/routes/usersRoutes");
 const sneakersRoutes = require("./api/routes/sneakersRoutes");
 const picturesRoutes = require("./api/routes/picturesRoutes");
@@ -56,8 +57,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(userRoutes);
+app.use(skansRoutes);
 app.use(sneakersRoutes);
 app.use(picturesRoutes);
+// app.use(skansRoutes);
 
 app.use(
   jwt({
