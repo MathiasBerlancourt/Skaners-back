@@ -60,14 +60,11 @@ module.exports.addFav = async (req, res) => {
     const { userId, objectId } = req.body;
 
     if (!userId || !objectId) {
-      throw new Error({ code: 401, message: "missing params" });
+      throw "missing params";
     }
     const user = await users.findById(userId);
     if (!user) {
-      throw new Error({
-        code: 404,
-        message: `no user found for this id: ${userId}`,
-      });
+      throw `no user found for this id: ${userId}`;
     }
     const newFav = await sneakers.findById(objectId);
     if (!objectId) {
@@ -79,19 +76,19 @@ module.exports.addFav = async (req, res) => {
     if (objectId) {
       user.favorites.map((fav) => {
         if (JSON.stringify(fav._id) === JSON.stringify(objectId)) {
-          throw new Error({ code: 401, message: "already in favs" });
+          throw "already in favs";
         }
       });
     }
     user.favorites.push(newFav);
-    // await user.save();
+    await user.save();
     return res
       .status(200)
       .json(`${objectId} bas been added to ${user.username} favorites`);
     //TODO check ERRORS
   } catch (e) {
-    //console.log(Error.prototype);
-    res.status(400).json(e.message);
+    console.log(e);
+    res.status(400).json(e);
   }
 };
 
@@ -99,14 +96,11 @@ module.exports.removeFav = async (req, res) => {
   try {
     const { userId, objectId } = req.body;
     if (!userId || !objectId) {
-      throw new Error({ code: 401, message: "missing params" });
+      throw "missing params";
     }
     const user = await users.findById(userId);
     if (!user) {
-      throw new Error({
-        code: 404,
-        message: `no user found for this id: ${userId}`,
-      });
+      throw `no user found for this id`;
     }
     const newTab = [...user.favorites];
     user.favorites.map((fav, index) => {
@@ -120,6 +114,6 @@ module.exports.removeFav = async (req, res) => {
       .status(200)
       .json(`${objectId} bas been removed from ${user.username} favorites`);
   } catch (e) {
-    res.status(400).json({ message: e.message });
+    res.status(400).json(e);
   }
 };
