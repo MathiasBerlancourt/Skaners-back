@@ -2,9 +2,9 @@ const { users } = require("../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const convertToBase64 = (file) => {
-  return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
-};
+// const convertToBase64 = (file) => {
+//   return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
+// };
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.SECRET_TOKEN, {
@@ -55,16 +55,5 @@ module.exports.signIn = async (req, res) => {
     }
   } catch (e) {
     res.status(401).json({ e });
-  }
-};
-module.exports.userInfo = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await users.findById(id);
-    if (user) {
-      res.status(200).json(user);
-    }
-  } catch (e) {
-    res.status(400).json({ message: e.message });
   }
 };
