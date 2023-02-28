@@ -1,4 +1,5 @@
 const { users } = require("../../models");
+const { sneakers } = require("../../models");
 const ObjectID = require("mongoose").Types.ObjectId;
 
 //// User Profile Handling \\\\\\\
@@ -56,10 +57,69 @@ module.exports.allUsers = async (req, res) => {
 
 module.exports.addFav = async (req, res) => {
   try {
-    const { userId, id, picturePath, title, pictureExt, description } =
-      req.body;
-    if (!userId || !id) {
+    const { userId, objectId } = req.body;
+
+    if (!userId || !objectId) {
       throw new Error({ code: 401, message: "missing params" });
     }
-  } catch (e) {}
+    const user = await users.findById(userId);
+    if (!user) {
+      throw new Error({
+        code: 404,
+        message: `no user found for this id: ${userId}`,
+      });
+    }
+    const newFav = await sneakers.findById(objectId);
+    if (!objectId) {
+      throw new Error({ code: 401, message: "This pictuce no longer exist" });
+    }
+
+    /// Problème ici !
+
+    if (objectId) {
+      user.favorites.map((fav) => {
+        if (JSON.stringify(fav._id) === JSON.stringify(objectId)) {
+          throw new Error({ code: 401, message: "already in favs" });
+        }
+      });
+    }
+    user.favorites.push(newFav);
+    // await user.save();
+    return res
+      .status(200)
+      .json(`${objectId} bas been added to ${user.username} favorites`);
+    //TODO check ERRORS
+  } catch (e) {
+    //console.log(Error.prototype);
+    res.status(400).json(e.message);
+  }
+};
+
+module.exports.removeFav = async (req, res) => {
+  try {
+    const { userId, objectId } = req.body;
+    if (!userId || !objectId) {
+      throw new Error({ code: 401, message: "missing params" });
+    }
+    const user = await users.findById(userId);
+    if (!user) {
+      throw new Error({
+        code: 404,
+        message: `no user found for this id: ${userId}`,
+      });
+    }
+    const newTab = [...user.favorites];
+    user.favorites.map((fav, index) => {
+      if (fav._id === objectId) {
+        return newTab.splice(index, 1);
+      }
+    });
+    user.favorites = newTab;
+    await user.save();
+    return res
+      .status(200)
+      .json(`${objectId} bas been removed from ${user.username} favorites`);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
 };

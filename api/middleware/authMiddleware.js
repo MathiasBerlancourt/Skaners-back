@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { users } = require("../../models");
 
+// TODO middleware fausse car attend un cookie mais AsyncStorage
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   console.log(token);
