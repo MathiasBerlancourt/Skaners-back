@@ -7,7 +7,8 @@ const cors = require("cors");
 const jwt = require("express-jwt");
 const morgan = require("morgan");
 const userRoutes = require("./api/routes/usersRoutes");
-const userSneakers = require("./api/routes/sneakersRoutes");
+const sneakersRoutes = require("./api/routes/sneakersRoutes");
+const picturesRoutes = require("./api/routes/picturesRoutes");
 const {
   errorHandler,
   ensureAuthenticated,
@@ -55,7 +56,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(userRoutes);
-app.use(userSneakers);
+app.use(sneakersRoutes);
+app.use(picturesRoutes);
 
 app.use(
   jwt({
