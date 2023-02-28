@@ -15,14 +15,8 @@ router.get(
 );
 router.put("/user/update/:id", userController.updateUser);
 router.delete("/user/delete/:id", userController.deleteUser);
-router.get("/api/users", async (req, res) => {
-  try {
-    const usersList = await users.find();
-    res.status(200).json(usersList);
-  } catch (e) {
-    console.log(e);
-    return "Error";
-  }
-});
+router.get("/api/users", userController.allUsers);
+
+router.put("/addFav", userController.addFav);
 
 module.exports = router;

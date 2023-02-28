@@ -1,6 +1,7 @@
 const { users } = require("../../models");
 const ObjectID = require("mongoose").Types.ObjectId;
 
+//// User Profile Handling \\\\\\\
 module.exports.updateUser = async (req, res) => {
   const { id: userId } = req.params;
   if (!ObjectID.isValid(userId)) throw `ID unknown: ${userId}`;
@@ -39,4 +40,26 @@ module.exports.deleteUser = async (req, res) => {
   } catch (err) {
     return res.status(500).json({ message: err });
   }
+};
+
+module.exports.allUsers = async (req, res) => {
+  try {
+    const usersList = await users.find();
+    return res.status(200).json(usersList);
+  } catch (e) {
+    console.log(e);
+    return "Error";
+  }
+};
+
+//// Favorites Handling \\\\\\\
+
+module.exports.addFav = async (req, res) => {
+  try {
+    const { userId, id, picturePath, title, pictureExt, description } =
+      req.body;
+    if (!userId || !id) {
+      throw new Error({ code: 401, message: "missing params" });
+    }
+  } catch (e) {}
 };
