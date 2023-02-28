@@ -43,7 +43,10 @@ module.exports = (mongoose, Mongoose) => {
       default: [],
       type: Array,
     },
-    adminRank: 0,
+    adminRank: {
+      type: Number,
+      default: 0,
+    },
   });
 
   return mongoose.model("users", schema, "users");
