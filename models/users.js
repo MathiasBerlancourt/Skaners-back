@@ -31,7 +31,7 @@ module.exports = (mongoose, Mongoose) => {
     },
     dateOfBirth: { type: Date },
 
-    favorites: {
+    sneakers: {
       default: [],
       type: Array,
     },

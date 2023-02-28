@@ -236,21 +236,6 @@
         "value": null
       }]
     }, {
-      "field": "favorites",
-      "type": "Json",
-      "defaultValue": [],
-      "enums": null,
-      "integration": null,
-      "isFilterable": true,
-      "isPrimaryKey": false,
-      "isReadOnly": false,
-      "isRequired": false,
-      "isSortable": true,
-      "isVirtual": false,
-      "reference": null,
-      "inverseOf": null,
-      "validations": []
-    }, {
       "field": "likes",
       "type": "Json",
       "defaultValue": [],
@@ -309,6 +294,21 @@
       "validations": []
     }, {
       "field": "skans",
+      "type": "Json",
+      "defaultValue": [],
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "sneakers",
       "type": "Json",
       "defaultValue": [],
       "enums": null,

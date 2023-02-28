@@ -55,7 +55,7 @@ module.exports.allUsers = async (req, res) => {
 
 //// Favorites Handling \\\\\\\
 
-module.exports.addFav = async (req, res) => {
+module.exports.addSneaker = async (req, res) => {
   try {
     const { userId, objectId } = req.body;
 
@@ -74,41 +74,44 @@ module.exports.addFav = async (req, res) => {
     /// Problème ici !
 
     if (objectId) {
-      user.favorites.map((fav) => {
-        if (JSON.stringify(fav._id) === JSON.stringify(objectId)) {
-          throw "already in favs";
+      user.sneakers.map((sneaker) => {
+        if (JSON.stringify(sneaker._id) === JSON.stringify(objectId)) {
+          const error = new Error("already in favs");
+          error.code = 403;
+          throw error;
         }
       });
     }
-    user.favorites.push(newFav);
+    user.sneakers.push(newFav);
     await user.save();
     return res
       .status(200)
       .json(`${objectId} bas been added to ${user.username} favorites`);
-    //TODO check ERRORS
-  } catch (e) {
-    console.log(e);
-    res.status(400).json(e);
+  } catch (err) {
+    console.log(err.message);
+    res.status(err.code).json({ error: err.message });
   }
 };
 
-module.exports.removeFav = async (req, res) => {
+module.exports.removeSneaker = async (req, res) => {
   try {
     const { userId, objectId } = req.body;
     if (!userId || !objectId) {
       throw "missing params";
     }
     const user = await users.findById(userId);
+    console.log(user);
     if (!user) {
       throw `no user found for this id`;
     }
-    const newTab = [...user.favorites];
-    user.favorites.map((fav, index) => {
-      if (fav._id === objectId) {
-        return newTab.splice(index, 1);
+    const newTab = [...user.sneakers];
+    user.sneakers.map((sneaker, index) => {
+      if (JSON.stringify(sneaker._id) === JSON.stringify(objectId)) {
+        newTab.splice(index, 1);
       }
     });
-    user.favorites = newTab;
+    console.log(newTab);
+    user.sneakers = newTab;
     await user.save();
     return res
       .status(200)
@@ -117,3 +120,5 @@ module.exports.removeFav = async (req, res) => {
     res.status(400).json(e);
   }
 };
+
+// TODO Error syntax on all routes

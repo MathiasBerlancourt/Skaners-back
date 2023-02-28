@@ -13,7 +13,7 @@ router.put("/user/update/:id", userController.updateUser);
 router.delete("/user/delete/:id", userController.deleteUser);
 router.get("/api/users", userController.allUsers);
 
-router.put("/user/addFav", userController.addFav);
-router.put("/user/removeFav", userController.removeFav);
+router.put("/user/addSneaker", userController.addSneaker);
+router.put("/user/removeSneaker", userController.removeSneaker);
 
 module.exports = router;
