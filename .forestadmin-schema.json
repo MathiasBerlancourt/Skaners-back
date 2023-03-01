@@ -72,9 +72,39 @@
       "inverseOf": null,
       "validations": []
     }, {
+      "field": "description",
+      "type": "String",
+      "defaultValue": null,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "isChecked",
       "type": "Boolean",
       "defaultValue": false,
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "linkUrl",
+      "type": "String",
+      "defaultValue": null,
       "enums": null,
       "integration": null,
       "isFilterable": true,
@@ -105,6 +135,21 @@
         "type": "is present",
         "value": null
       }]
+    }, {
+      "field": "sneakerName",
+      "type": "String",
+      "defaultValue": "",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
     }, {
       "field": "userId",
       "type": "String",
