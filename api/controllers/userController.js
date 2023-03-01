@@ -1,4 +1,4 @@
-const { users } = require("../../models");
+const { users, skans } = require("../../models");
 const { sneakers } = require("../../models");
 const ObjectID = require("mongoose").Types.ObjectId;
 
@@ -55,7 +55,7 @@ module.exports.allUsers = async (req, res) => {
 
 //// Favorites Handling \\\\\\\
 
-module.exports.addSneaker = async (req, res) => {
+module.exports.likeSneaker = async (req, res) => {
   try {
     const { userId, objectId } = req.body;
 
@@ -93,10 +93,10 @@ module.exports.addSneaker = async (req, res) => {
   }
 };
 
-module.exports.removeSneaker = async (req, res) => {
+module.exports.unlikeSneaker = async (req, res) => {
   try {
-    const { userId, objectId } = req.body;
-    if (!userId || !objectId) {
+    const { userId, sneakerId } = req.body;
+    if (!userId || !sneakerId) {
       throw "missing params";
     }
     const user = await users.findById(userId);
@@ -106,7 +106,7 @@ module.exports.removeSneaker = async (req, res) => {
     }
     const newTab = [...user.sneakers];
     user.sneakers.map((sneaker, index) => {
-      if (JSON.stringify(sneaker._id) === JSON.stringify(objectId)) {
+      if (JSON.stringify(sneaker._id) === JSON.stringify(sneakerId)) {
         newTab.splice(index, 1);
       }
     });
@@ -115,15 +115,85 @@ module.exports.removeSneaker = async (req, res) => {
     await user.save();
     return res
       .status(200)
-      .json(`${objectId} bas been removed from ${user.username} favorites`);
+      .json(`${sneakerId} bas been removed from ${user.username} favorites`);
   } catch (e) {
     res.status(400).json(e);
   }
 };
 
-module.exports.addLike = async (req, res) => {};
-module.exports.removeLike = async (req, res) => {};
-module.exports.addSkan = async (req, res) => {};
-module.exports.removeSkan = async (req, res) => {};
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
+
+const convertToBase64 = (file) => {
+  return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
+};
+
+module.exports.addSkan = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const { pict } = req.files;
+    const user = await users.findById(userId);
+    if (!user) {
+      const error = new Error("Any user find with this Id");
+      error.code = 403;
+      throw error;
+    }
+    const result = await cloudinary.uploader.upload(convertToBase64(pict), {
+      folder: `Skaners/user/${user.email}`,
+    });
+
+    const skan = await skans.create({
+      pictureUrl: result.secure_url,
+      userId,
+    });
+    res.status(201).json({ skan });
+  } catch (err) {
+    res.status(err.code).json({ error: err.message });
+  }
+};
+
+module.exports.likeSkan = async (req, res) => {
+  try {
+    const { userId, skanId } = req.body;
+
+    if (!userId || !skanId) {
+      throw "missing params";
+    }
+    const user = await users.findById(userId);
+    if (!user) {
+      throw `no user found for this id: ${userId}`;
+    }
+    const newFav = await skans.findById(skanId);
+    if (!skanId) {
+      throw new Error({ code: 401, message: "This pictuce no longer exist" });
+    }
+
+    /// Problème ici !
+
+    if (skanId) {
+      user.skans.map((skan) => {
+        if (JSON.stringify(skan._id) === JSON.stringify(skanId)) {
+          const error = new Error("already in favs");
+          error.code = 403;
+          throw error;
+        }
+      });
+    }
+    user.skans.push(newFav);
+    await user.save();
+    return res
+      .status(200)
+      .json(`${skanId} bas been added to ${user.username} favorites`);
+  } catch (err) {
+    console.log(err.message);
+    res.status(err.code).json({ error: err.message });
+  }
+};
 
 // TODO Error syntax on all routes
