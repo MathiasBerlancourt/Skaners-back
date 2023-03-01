@@ -8,6 +8,9 @@ module.exports = (mongoose, Mongoose) => {
     isChecked: { type: Boolean, default: false },
     pictureUrl: { type: String, required: true },
     userId: { type: String, required: true },
+    sneakerName: { type: String, default: "" },
+    description: { type: String },
+    linkUrl: { type: String },
   });
 
   return mongoose.model("skans", schema, "skans");

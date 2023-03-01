@@ -10,7 +10,7 @@ module.exports.allSkans = async (req, res) => {
 };
 
 module.exports.deleteSkan = async (req, res) => {
-  const { skanId } = req.body;
+  const skanId = req.params.id;
   try {
     await skans.findByIdAndDelete(skanId).exec();
     res.status(200).json({ message: "Successfully deleted." });

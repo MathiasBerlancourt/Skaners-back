@@ -8,7 +8,7 @@ router.get("/allSkans", skanController.allSkans);
 ////// Admin checkSkan isChecked -> true
 router.put("/checkSkan", adminController.checkSkan);
 ////// deleteSkans
-router.delete("/deleteSkan", skanController.deleteSkan);
+router.delete("/deleteSkan/:id", skanController.deleteSkan);
 
 module.exports = router;
 
