@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const skanController = require("../controllers/skanController");
-const fileUpload = require("express-fileupload");
+const adminController = require("../controllers/adminController");
 
-////// User add skan with his Id
-router.post("/user/addSkan", fileUpload(), skanController.addSkan);
-////// Admin allSkans
-router.get("/admin/allSkans", skanController.allSkans);
+////// Admin and TinderLikeCarousel allSkans
+router.get("/allSkans", skanController.allSkans);
 ////// Admin checkSkan isChecked -> true
+router.put("/checkSkan", adminController.checkSkan);
+////// deleteSkans
+router.delete("/deleteSkan", skanController.deleteSkan);
 
 module.exports = router;
 

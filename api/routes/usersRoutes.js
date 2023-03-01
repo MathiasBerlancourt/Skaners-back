@@ -3,6 +3,7 @@ const router = express.Router();
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const authMiddleware = require("../middleware/authMiddleware");
+const fileUpload = require("express-fileupload");
 
 router.post("/signup", authController.signUp);
 router.post("/signin", authController.signIn);
@@ -12,13 +13,16 @@ router.put("/user/update/:id", userController.updateUser);
 router.delete("/user/delete/:id", userController.deleteUser);
 router.get("/api/users", userController.allUsers);
 
-router.put("/user/addSneaker", userController.addSneaker);
-router.put("/user/removeSneaker", userController.removeSneaker);
+router.put("/user/likeSneaker", userController.likeSneaker);
+router.put("/user/unlikeSneaker", userController.unlikeSneaker);
 
-router.put("/user/addLike", userController.addLike);
-router.put("/user/addLike", userController.removeLike);
+// router.put("/user/likePicture", userController.likePicture);
+// router.put("/user/unlikePicture", userController.unlikePicture);
 
-// router.put("/user/addSkan", userController.addSkan);
+////// User add skan with his Id
+router.post("/user/addSkan", fileUpload(), userController.addSkan);
+router.put("/user/likeSkan", userController.likeSkan);
+
 // router.put("/user/removeSkan", userController.removeSkan);
 
 module.exports = router;
