@@ -18,3 +18,5 @@ module.exports.deleteSkan = async (req, res) => {
     return "Error";
   }
 };
+
+//TODO delete picture from cloudinary

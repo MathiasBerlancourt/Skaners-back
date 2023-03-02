@@ -1,4 +1,4 @@
-const { users, skans } = require("../../models");
+const { users, skans, pictures } = require("../../models");
 const { sneakers } = require("../../models");
 const ObjectID = require("mongoose").Types.ObjectId;
 
@@ -217,6 +217,70 @@ module.exports.unlikeSkan = async (req, res) => {
     return res
       .status(200)
       .json(`${skanId} bas been removed from ${user.userName} favorites`);
+  } catch (e) {
+    res.status(400).json(e);
+  }
+};
+
+module.exports.likePictures = async (req, res) => {
+  try {
+    console.log(req);
+    const { userId, pictureId } = req.body;
+
+    if (!userId || !pictureId) {
+      throw "missing params";
+    }
+    const user = await users.findById(userId);
+    if (!user) {
+      throw `no user found for this id: ${userId}`;
+    }
+    const newFav = await pictures.findById(pictureId);
+    if (!pictureId) {
+      throw new Error({ code: 401, message: "This pictuce no longer exist" });
+    }
+
+    if (pictureId) {
+      user.likes.map((picture) => {
+        if (JSON.stringify(picture._id) === JSON.stringify(pictureId)) {
+          const error = new Error("already in favs");
+          error.code = 403;
+          throw error;
+        }
+      });
+    }
+    user.likes.push(newFav);
+    await user.save();
+    return res
+      .status(200)
+      .json(`${pictureId} bas been added to ${user.userName} favorites`);
+  } catch (err) {
+    console.log(err.message);
+    res.status(err.code).json({ error: err.message });
+  }
+};
+
+module.exports.unlikePictures = async (req, res) => {
+  try {
+    const { userId, pictureId } = req.body;
+    if (!userId || !pictureId) {
+      throw "missing params";
+    }
+    const user = await users.findById(userId);
+
+    if (!user) {
+      throw `no user found for this id`;
+    }
+    const newTab = [...user.likes];
+    user.likes.map((picture, index) => {
+      if (JSON.stringify(picture._id) === JSON.stringify(pictureId)) {
+        newTab.splice(index, 1);
+      }
+    });
+    user.likes = newTab;
+    await user.save();
+    return res
+      .status(200)
+      .json(`${pictureId} bas been removed from ${user.userName} favorites`);
   } catch (e) {
     res.status(400).json(e);
   }
