@@ -9,8 +9,6 @@ Route : /signin
   - email
   - password
 
-//////////////////////////////
-
 Route : /signup
 
 - Method: POST
@@ -25,8 +23,6 @@ Route : /user/info/:id (information of specific user)
 
 - Method: GET
 
-//////////////////////////////
-
 Route : /user/update/:id (update specific user by his id)
 
 - Method: PUT
@@ -35,13 +31,9 @@ Route : /user/update/:id (update specific user by his id)
   - email
   - pictureUrl
 
-//////////////////////////////
-
 Route : /user/delete/:id (delete specific user by his id)
 
 - Method: DELETE
-
-//////////////////////////////
 
 -------------- SNEAKERS --------------
 
@@ -49,13 +41,9 @@ Route : /sneakers (list of available sneakers)
 
 - Method: GET
 
-//////////////////////////////
-
 Route : /sneakers/:id (specific sneaker by his id)
 
 - Method: GET
-
-//////////////////////////////
 
 Route : /user/likeSneaker
 
@@ -63,8 +51,6 @@ Route : /user/likeSneaker
 - Body Parameters :
   - userId
   - sneakerId
-
-//////////////////////////////
 
 Route : /user/unlikeSneaker
 
@@ -85,8 +71,6 @@ Route : /allSkans (list of available skans)
 
 - Method: GET
 
-//////////////////////////////
-
 Route : /checkSkan (to check a skan)
 
 - Method: PUT
@@ -96,13 +80,9 @@ Route : /checkSkan (to check a skan)
   - description
   - linkUrl
 
-//////////////////////////////
-
 Route : /deleteSkan/:id (delete a skan)
 
 - Method: DELETE
-
-//////////////////////////////
 
 Route : /user/addSkan (to make a skan request)
 
@@ -110,8 +90,6 @@ Route : /user/addSkan (to make a skan request)
 - Body Parameters :
   - picture
   - userId
-
-//////////////////////////////
 
 Route : /user/likeSkan (to like a skan)
 
