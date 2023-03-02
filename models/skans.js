@@ -9,8 +9,8 @@ module.exports = (mongoose, Mongoose) => {
     pictureUrl: { type: String, required: true },
     userId: { type: String, required: true },
     sneakerName: { type: String, default: "" },
-    description: { type: String },
-    linkUrl: { type: String },
+    description: { type: String, default: "" },
+    linkUrl: { type: String, default: "" },
   });
 
   return mongoose.model("skans", schema, "skans");

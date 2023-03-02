@@ -27,7 +27,7 @@ module.exports = (mongoose, Mongoose) => {
     },
     pictureUrl: {
       type: String,
-      default: "// NO PICTURE HERE \\",
+      default: "",
     },
     dateOfBirth: { type: Date },
 

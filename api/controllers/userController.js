@@ -57,25 +57,25 @@ module.exports.allUsers = async (req, res) => {
 
 module.exports.likeSneaker = async (req, res) => {
   try {
-    const { userId, objectId } = req.body;
+    const { userId, sneakerId } = req.body;
 
-    if (!userId || !objectId) {
+    if (!userId || !sneakerId) {
       throw "missing params";
     }
     const user = await users.findById(userId);
     if (!user) {
       throw `no user found for this id: ${userId}`;
     }
-    const newFav = await sneakers.findById(objectId);
-    if (!objectId) {
+    const newFav = await sneakers.findById(sneakerId);
+    if (!sneakerId) {
       throw new Error({ code: 401, message: "This pictuce no longer exist" });
     }
 
     /// Problème ici !
 
-    if (objectId) {
+    if (sneakerId) {
       user.sneakers.map((sneaker) => {
-        if (JSON.stringify(sneaker._id) === JSON.stringify(objectId)) {
+        if (JSON.stringify(sneaker._id) === JSON.stringify(sneakerId)) {
           const error = new Error("already in favs");
           error.code = 403;
           throw error;
@@ -86,7 +86,7 @@ module.exports.likeSneaker = async (req, res) => {
     await user.save();
     return res
       .status(200)
-      .json(`${objectId} bas been added to ${user.username} favorites`);
+      .json(`${sneakerId} bas been added to ${user.username} favorites`);
   } catch (err) {
     console.log(err.message);
     res.status(err.code).json({ error: err.message });
@@ -137,14 +137,14 @@ const convertToBase64 = (file) => {
 module.exports.addSkan = async (req, res) => {
   try {
     const { userId } = req.body;
-    const { pict } = req.files;
+    const { picture } = req.files;
     const user = await users.findById(userId);
     if (!user) {
       const error = new Error("Any user find with this Id");
       error.code = 403;
       throw error;
     }
-    const result = await cloudinary.uploader.upload(convertToBase64(pict), {
+    const result = await cloudinary.uploader.upload(convertToBase64(picture), {
       folder: `Skaners/user/${user.email}`,
     });
 

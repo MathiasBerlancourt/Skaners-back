@@ -74,7 +74,7 @@
     }, {
       "field": "description",
       "type": "String",
-      "defaultValue": null,
+      "defaultValue": "",
       "enums": null,
       "integration": null,
       "isFilterable": true,
@@ -104,7 +104,7 @@
     }, {
       "field": "linkUrl",
       "type": "String",
-      "defaultValue": null,
+      "defaultValue": "",
       "enums": null,
       "integration": null,
       "isFilterable": true,
@@ -406,7 +406,7 @@
     }, {
       "field": "pictureUrl",
       "type": "String",
-      "defaultValue": "// NO PICTURE HERE \\",
+      "defaultValue": "",
       "enums": null,
       "integration": null,
       "isFilterable": true,
@@ -485,7 +485,7 @@
     "stack": {
       "database_type": "MongoDB",
       "engine": "nodejs",
-      "engine_version": "18.12.1",
+      "engine_version": "19.6.0",
       "orm_version": "5.13.16"
     }
   }

@@ -14,7 +14,11 @@ module.exports.checkSkan = async (req, res) => {
     const newTab = [...user.skans];
 
     skan.sneakerName = sneakerName;
+    skan.description = description;
+    skan.linkUrl = linkUrl;
+
     newTab.push(skan);
+
     user.skans = newTab;
     await skan.save();
     await user.save();
