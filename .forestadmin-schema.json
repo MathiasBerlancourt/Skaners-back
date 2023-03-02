@@ -495,8 +495,8 @@
       "validations": []
     }, {
       "field": "shoeSize",
-      "type": "Number",
-      "defaultValue": null,
+      "type": "String",
+      "defaultValue": "",
       "enums": null,
       "integration": null,
       "isFilterable": true,
