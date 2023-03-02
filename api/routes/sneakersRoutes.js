@@ -2,10 +2,24 @@ const express = require("express");
 const router = express.Router();
 
 const { sneakers } = require("../../models");
+const querystring = require("querystring");
 
 router.get("/sneakers", async (req, res) => {
   try {
-    const findSneaker = await sneakers.find();
+    const { name, brand, color } = req.query;
+    const filters = {};
+    if (name) {
+      filters.name = new RegExp(name, "i");
+    }
+    if (brand) {
+      filters.brand = new RegExp(brand, "i");
+    }
+
+    if (color) {
+      filters.color = new RegExp(color, "i");
+    }
+
+    const findSneaker = await sneakers.find(filters).populate();
     res.json(findSneaker);
   } catch (e) {
     console.log(e);
