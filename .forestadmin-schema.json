@@ -539,7 +539,7 @@
       "inverseOf": null,
       "validations": []
     }, {
-      "field": "userName",
+      "field": "username",
       "type": "String",
       "defaultValue": null,
       "enums": null,

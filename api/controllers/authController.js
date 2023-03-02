@@ -14,8 +14,8 @@ const createToken = (id) => {
 
 module.exports.signUp = async (req, res) => {
   try {
-    let {
-      userName,
+    const {
+      username,
       email,
       password,
       pictureUrl,
@@ -36,17 +36,17 @@ module.exports.signUp = async (req, res) => {
         .json({ message: "This email already has an account" });
     }
 
-    const thisUser = await users.findOne({ userName: userName });
+    const thisUser = await users.findOne({ username: username });
     if (thisUser) {
       return res
         .status(409)
         .json({ message: "This username already has an account" });
     }
 
-    if (userName && email && password) {
+    if (username && email && password) {
       bcrypt.hash(password, saltRounds, async (err, hash) => {
         const user = await users.create({
-          userName,
+          username,
           email,
           password: hash,
           pictureUrl,
