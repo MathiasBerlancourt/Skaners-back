@@ -86,7 +86,7 @@ module.exports.likeSneaker = async (req, res) => {
     await user.save();
     return res
       .status(200)
-      .json(`${sneakerId} bas been added to ${user.username} favorites`);
+      .json(`${sneakerId} bas been added to ${user.userName} favorites`);
   } catch (err) {
     console.log(err.message);
     res.status(err.code).json({ error: err.message });
@@ -115,7 +115,7 @@ module.exports.unlikeSneaker = async (req, res) => {
     await user.save();
     return res
       .status(200)
-      .json(`${sneakerId} bas been removed from ${user.username} favorites`);
+      .json(`${sneakerId} bas been removed from ${user.userName} favorites`);
   } catch (e) {
     res.status(400).json(e);
   }
@@ -189,7 +189,7 @@ module.exports.likeSkan = async (req, res) => {
     await user.save();
     return res
       .status(200)
-      .json(`${skanId} bas been added to ${user.username} favorites`);
+      .json(`${skanId} bas been added to ${user.userName} favorites`);
   } catch (err) {
     console.log(err.message);
     res.status(err.code).json({ error: err.message });

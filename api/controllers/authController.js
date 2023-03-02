@@ -14,7 +14,7 @@ const createToken = (id) => {
 
 module.exports.signUp = async (req, res) => {
   try {
-    let {
+    const {
       userName,
       email,
       password,
