@@ -11,5 +11,3 @@ router.put("/checkSkan", adminController.checkSkan);
 router.delete("/deleteSkan/:id", skanController.deleteSkan);
 
 module.exports = router;
-
-//TODO Route admin allSkan, route checkSkan /:skanId, set true isChecked, then send it to the user with his id

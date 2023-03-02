@@ -7,13 +7,13 @@ const isAuthenticated = async (req, res, next) => {
       const token = req.headers.authorization.replace("Bearer ", "");
       const checkToken = jwt.verify(token, process.env.SECRET_TOKEN);
       if (checkToken.id) {
-        return res.status(200).json({ message: "Authorized" });
+        return res.status(200).json({ message: "Authorized" }).next();
       }
     } else {
-      return res.status(401).json({ error: "Unauthorized" });
+      return res.status(401).json({ error: "Unauthorized" }).next();
     }
   } catch (e) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized" }).next();
   }
 };
 

@@ -69,6 +69,20 @@ Route : /pictures
 
 - Method: GET (list of pictures of lifestyle sneakers like Pinterest)
 
+Route : /user/likePicture (to like a skan)
+
+- Method: PUT
+- Body Parameters :
+  - userId
+  - skanId
+  -
+Route : /user/unlikePicture (to unlike a skan)
+
+- Method: PUT
+- Body Parameters :
+  - userId
+  - skanId
+
 -------------- SKANS --------------
 
 Route : /allSkans (list of available skans)
