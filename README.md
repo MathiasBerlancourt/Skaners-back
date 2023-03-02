@@ -37,9 +37,13 @@ Route : /user/delete/:id (delete specific user by his id)
 
 -------------- SNEAKERS --------------
 
-Route : /sneakers (list of available sneakers)
+Route : /sneakers?name=&brand&price=&color (list of available sneakers)
 
 - Method: GET
+- Query Parameters :
+  - name
+  - brand
+  - color
 
 Route : /sneakers/:id (specific sneaker by his id)
 
