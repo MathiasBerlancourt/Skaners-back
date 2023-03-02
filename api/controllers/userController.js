@@ -71,8 +71,6 @@ module.exports.likeSneaker = async (req, res) => {
       throw new Error({ code: 401, message: "This pictuce no longer exist" });
     }
 
-    /// Problème ici !
-
     if (sneakerId) {
       user.sneakers.map((sneaker) => {
         if (JSON.stringify(sneaker._id) === JSON.stringify(sneakerId)) {
@@ -160,6 +158,7 @@ module.exports.addSkan = async (req, res) => {
 
 module.exports.likeSkan = async (req, res) => {
   try {
+    console.log(req);
     const { userId, skanId } = req.body;
 
     if (!userId || !skanId) {
@@ -173,8 +172,6 @@ module.exports.likeSkan = async (req, res) => {
     if (!skanId) {
       throw new Error({ code: 401, message: "This pictuce no longer exist" });
     }
-
-    /// Problème ici !
 
     if (skanId) {
       user.skans.map((skan) => {
@@ -193,6 +190,35 @@ module.exports.likeSkan = async (req, res) => {
   } catch (err) {
     console.log(err.message);
     res.status(err.code).json({ error: err.message });
+  }
+};
+
+module.exports.unlikeSkan = async (req, res) => {
+  console.log(req);
+  try {
+    const { userId, skanId } = req.body;
+    if (!userId || !skanId) {
+      throw "missing params";
+    }
+    const user = await users.findById(userId);
+
+    if (!user) {
+      throw `no user found for this id`;
+    }
+    const newTab = [...user.skans];
+    user.skans.map((skan, index) => {
+      if (JSON.stringify(skan._id) === JSON.stringify(skanId)) {
+        newTab.splice(index, 1);
+      }
+    });
+    console.log(newTab);
+    user.skans = newTab;
+    await user.save();
+    return res
+      .status(200)
+      .json(`${skanId} bas been removed from ${user.userName} favorites`);
+  } catch (e) {
+    res.status(400).json(e);
   }
 };
 
