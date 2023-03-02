@@ -101,3 +101,10 @@ Route : /user/likeSkan (to like a skan)
 - Body Parameters :
   - userId
   - skanId
+  - 
+Route : /user/unlikeSkan (to unlike a skan)
+
+- Method: PUT
+- Body Parameters :
+  - userId
+  - skanId

@@ -1,47 +1,20 @@
 const jwt = require("jsonwebtoken");
 const { users } = require("../../models");
 
-// TODO middleware fausse car attend un cookie mais AsyncStorage
-module.exports.checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
-  console.log(token);
-  if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if (err) {
-        res.locals.user = null;
-        res.cookie("jwt", "", { maxAge: 1 });
-        next();
-      } else {
-        console.log("User checked !");
-        let thisUser = await users.findById(decodedToken.id);
-        res.locals.user = thisUser;
-        next();
+const isAuthenticated = async (req, res, next) => {
+  try {
+    if (req.headers.authorization) {
+      const token = req.headers.authorization.replace("Bearer ", "");
+      const checkToken = jwt.verify(token, process.env.SECRET_TOKEN);
+      if (checkToken.id) {
+        return res.status(200).json({ message: "Authorized" });
       }
-    });
-  } else {
-    res.locals.user = null;
-    next();
+    } else {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+  } catch (e) {
+    return res.status(401).json({ error: "Unauthorized" });
   }
 };
 
-module.exports.requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
-  console.log(token);
-  try {
-    if (token) {
-      jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-        if (err) {
-          console.log(err);
-          res.status(200).json("no token");
-        } else {
-          console.log(decodedToken.id);
-          next();
-        }
-      });
-    } else {
-      console.log("No token");
-    }
-  } catch (e) {
-    console.log(e);
-  }
-};
+module.exports = isAuthenticated;

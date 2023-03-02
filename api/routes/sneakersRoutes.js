@@ -19,7 +19,7 @@ router.get("/sneakers", async (req, res) => {
       filters.color = new RegExp(color, "i");
     }
 
-    const findSneaker = await sneakers.find(filters).populate();
+    const findSneaker = await sneakers.find(filters);
     res.json(findSneaker);
   } catch (e) {
     console.log(e);
