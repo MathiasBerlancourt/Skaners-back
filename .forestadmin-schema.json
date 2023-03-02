@@ -362,6 +362,51 @@
         "value": null
       }]
     }, {
+      "field": "favoriteBrand",
+      "type": "String",
+      "defaultValue": "",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "firstName",
+      "type": "String",
+      "defaultValue": "",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "lastName",
+      "type": "String",
+      "defaultValue": "",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "likes",
       "type": "Json",
       "defaultValue": [],
@@ -404,7 +449,52 @@
         "value": 6
       }]
     }, {
+      "field": "phoneNumber",
+      "type": "String",
+      "defaultValue": "",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
       "field": "pictureUrl",
+      "type": "String",
+      "defaultValue": "",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "sex",
+      "type": "String",
+      "defaultValue": "",
+      "enums": null,
+      "integration": null,
+      "isFilterable": true,
+      "isPrimaryKey": false,
+      "isReadOnly": false,
+      "isRequired": false,
+      "isSortable": true,
+      "isVirtual": false,
+      "reference": null,
+      "inverseOf": null,
+      "validations": []
+    }, {
+      "field": "shoeSize",
       "type": "String",
       "defaultValue": "",
       "enums": null,
@@ -449,7 +539,7 @@
       "inverseOf": null,
       "validations": []
     }, {
-      "field": "username",
+      "field": "userName",
       "type": "String",
       "defaultValue": null,
       "enums": null,
@@ -485,7 +575,7 @@
     "stack": {
       "database_type": "MongoDB",
       "engine": "nodejs",
-      "engine_version": "19.6.0",
+      "engine_version": "18.12.1",
       "orm_version": "5.13.16"
     }
   }
