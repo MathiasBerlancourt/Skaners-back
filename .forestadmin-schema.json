@@ -575,7 +575,7 @@
     "stack": {
       "database_type": "MongoDB",
       "engine": "nodejs",
-      "engine_version": "18.12.1",
+      "engine_version": "19.6.0",
       "orm_version": "5.13.16"
     }
   }
