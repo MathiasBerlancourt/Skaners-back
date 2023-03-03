@@ -147,12 +147,13 @@ module.exports.addSkan = async (req, res) => {
           folder: `Skaners/user/${user.email}`,
         }
       );
-    const skan = await skans.create({
-      cloudinary: result,
-      pictureUrl: result.secure_url,
-      userId,
-    });
-    res.status(201).json({ skan });
+      const skan = await skans.create({
+        cloudinary: result,
+        pictureUrl: result.secure_url,
+        userId,
+      });
+      res.status(201).json({ skan });
+    }
   } catch (err) {
     res.status(err.code).json({ error: err.message });
   }
