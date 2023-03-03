@@ -140,11 +140,13 @@ module.exports.addSkan = async (req, res) => {
       const error = new Error("Any user find with this Id");
       error.code = 403;
       throw error;
-    }
-    const result = await cloudinary.uploader.upload(convertToBase64(picture), {
-      folder: `Skaners/user/${user.email}`,
-    });
-
+    } else {
+      const result = await cloudinary.uploader.upload(
+        convertToBase64(picture),
+        {
+          folder: `Skaners/user/${user.email}`,
+        }
+      );
     const skan = await skans.create({
       cloudinary: result,
       pictureUrl: result.secure_url,
