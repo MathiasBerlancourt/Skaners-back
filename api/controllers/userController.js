@@ -1,6 +1,14 @@
 const { users, skans, pictures } = require("../../models");
 const { sneakers } = require("../../models");
 const ObjectID = require("mongoose").Types.ObjectId;
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 //// User Profile Handling \\\\\\\
 module.exports.updateUser = async (req, res) => {
@@ -119,15 +127,6 @@ module.exports.unlikeSneaker = async (req, res) => {
   }
 };
 
-const cloudinary = require("cloudinary").v2;
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true,
-});
-
 const convertToBase64 = (file) => {
   return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
 };
@@ -148,15 +147,35 @@ module.exports.addSkan = async (req, res) => {
           folder: `Skaners/user/${user.email}`,
         }
       );
-
-      const skan = await skans.create({
-        pictureUrl: result.secure_url,
-        userId,
-      });
-      res.status(201).json({ skan });
-    }
+    const skan = await skans.create({
+      cloudinary: result,
+      pictureUrl: result.secure_url,
+      userId,
+    });
+    res.status(201).json({ skan });
   } catch (err) {
     res.status(err.code).json({ error: err.message });
+  }
+};
+
+module.exports.deleteSkan = async (req, res) => {
+  const skanId = req.params.id;
+  try {
+    const skan = await skans.findById(skanId);
+    console.log(skan.cloudinary.public_id);
+
+    await cloudinary.uploader.destroy(
+      skan.cloudinary.public_id,
+      function (error, result) {
+        console.log("file upload", result, error);
+      }
+    );
+
+    await skans.deleteOne({ _id: skanId }).exec();
+
+    res.status(200).json({ message: "Successfully deleted." });
+  } catch (e) {
+    return "Error";
   }
 };
 

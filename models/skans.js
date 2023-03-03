@@ -11,6 +11,7 @@ module.exports = (mongoose, Mongoose) => {
     sneakerName: { type: String, default: "" },
     description: { type: String, default: "" },
     linkUrl: { type: String, default: "" },
+    cloudinary: { type: Object, default: {} },
   });
 
   return mongoose.model("skans", schema, "skans");
