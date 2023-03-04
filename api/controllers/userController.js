@@ -197,6 +197,13 @@ module.exports.likeSkan = async (req, res) => {
       throw new Error({ code: 401, message: "This pictuce no longer exist" });
     }
 
+    // const errorHandler = ({ code, message }) => {
+    // console.error(message);
+    //   const error = new Error(message);
+    //   error.code = code;
+    //   return error;
+    // };
+
     if (skanId) {
       user.skans.map((skan) => {
         if (JSON.stringify(skan._id) === JSON.stringify(skanId)) {

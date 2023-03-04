@@ -19,7 +19,16 @@ router.get("/sneakers", async (req, res) => {
       filters.color = new RegExp(color, "i");
     }
 
-    const findSneaker = await sneakers.find(filters);
+    // const filtersKeys = Object.keys(req.query)
+    // if (!filtersKeys.length) {
+    //    errorHandler(401, "cannot filter without filter")
+    // }
+
+    // filtersKeys.forEach((key) => {
+    //   filtersKeys[key] = new RegExp(key, "i");
+    // });
+
+    const findSneaker = await sneakers.find(filtersKeys);
     res.json(findSneaker);
   } catch (e) {
     console.log(e);
