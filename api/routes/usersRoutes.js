@@ -16,8 +16,8 @@ router.get("/api/users", isAuthenticated, userController.allUsers);
 router.put("/user/likeSneaker", userController.likeSneaker);
 router.put("/user/unlikeSneaker", userController.unlikeSneaker);
 
-// router.put("/user/likePicture", userController.likePicture);
-// router.put("/user/unlikePicture", userController.unlikePicture);
+router.put("/user/likePicture", userController.likePictures);
+router.put("/user/unlikePicture", userController.unlikePictures);
 
 ////// User add skan with his id
 router.post("/user/addSkan", fileUpload(), userController.addSkan);
