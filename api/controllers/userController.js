@@ -182,7 +182,6 @@ module.exports.deleteSkan = async (req, res) => {
 
 module.exports.likeSkan = async (req, res) => {
   try {
-    console.log(req);
     const { userId, skanId } = req.body;
 
     if (!userId || !skanId) {
