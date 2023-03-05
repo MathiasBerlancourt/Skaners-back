@@ -28,7 +28,7 @@ router.get("/sneakers", async (req, res) => {
     //   filtersKeys[key] = new RegExp(key, "i");
     // });
 
-    const findSneaker = await sneakers.find(filtersKeys);
+    const findSneaker = await sneakers.find(filters);
     res.json(findSneaker);
   } catch (e) {
     console.log(e);
