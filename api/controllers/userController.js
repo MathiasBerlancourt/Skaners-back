@@ -106,7 +106,7 @@ module.exports.unlikeSneaker = async (req, res) => {
       throw "missing params";
     }
     const user = await users.findById(userId);
-    console.log(user);
+
     if (!user) {
       throw `no user found for this id`;
     }
@@ -116,7 +116,6 @@ module.exports.unlikeSneaker = async (req, res) => {
         newTab.splice(index, 1);
       }
     });
-    console.log(newTab);
     user.sneakers = newTab;
     await user.save();
     return res
@@ -163,7 +162,6 @@ module.exports.deleteSkan = async (req, res) => {
   const skanId = req.params.id;
   try {
     const skan = await skans.findById(skanId);
-    console.log(skan.cloudinary.public_id);
 
     await cloudinary.uploader.destroy(
       skan.cloudinary.public_id,
@@ -224,7 +222,6 @@ module.exports.likeSkan = async (req, res) => {
 };
 
 module.exports.unlikeSkan = async (req, res) => {
-  console.log(req);
   try {
     const { userId, skanId } = req.body;
     if (!userId || !skanId) {
@@ -241,7 +238,6 @@ module.exports.unlikeSkan = async (req, res) => {
         newTab.splice(index, 1);
       }
     });
-    console.log(newTab);
     user.skans = newTab;
     await user.save();
     return res
@@ -254,7 +250,6 @@ module.exports.unlikeSkan = async (req, res) => {
 
 module.exports.likePictures = async (req, res) => {
   try {
-    console.log(req);
     const { userId, pictureId } = req.body;
 
     if (!userId || !pictureId) {

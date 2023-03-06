@@ -15,6 +15,7 @@ const {
   ensureAuthenticated,
   PUBLIC_ROUTES,
 } = require("forest-express-mongoose");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -90,5 +91,7 @@ requireAll({
 });
 
 app.use(errorHandler());
+
+mongoose.set("useFindAndModify", false);
 
 module.exports = app;
