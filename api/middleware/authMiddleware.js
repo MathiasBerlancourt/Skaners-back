@@ -12,7 +12,7 @@ const isAuthenticated = async (req, res, next) => {
       return next();
     }
   } else {
-    return res.status(401).json({ error: "Unauthorized" }).next();
+    return res.status(401).json({ error: "Unauthorized" });
   }
 };
 
