@@ -8,7 +8,7 @@ const fileUpload = require("express-fileupload");
 router.post("/signup", authController.signUp);
 router.post("/signin", authController.signIn);
 
-router.get("/user/info/:id", isAuthenticated, userController.userInfo);
+router.get("/user/info/:id", userController.userInfo);
 router.put("/user/update/:id", isAuthenticated, userController.updateUser);
 router.delete("/user/delete/:id", userController.deleteUser);
 router.get("/api/users", isAuthenticated, userController.allUsers);
