@@ -1,4 +1,5 @@
 # 👟 skaners-back 
+![ExpressJS](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)  ![nodejs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)  ![mongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) 
 
 # 🔐 AUTHENTIFICATION 
 
@@ -13,10 +14,17 @@
 
 - Method: POST
 - Body Parameters :
-  - username
   - email
+  - userName
   - password
-
+  - firstName
+  - dateOfBirth
+  - phoneNumber
+  - sex
+  - favoriteBrand
+  - shoeSize
+  - pictureUrl
+  
 # 👨‍💻 USER 
 
 ## Route : /user/info/:id (information of specific user)
@@ -27,9 +35,11 @@
 
 - Method: PUT
 - Body Parameters :
-  - username
+  - userName,
   - email
-  - pictureUrl
+  - phoneNumber
+  - shoeSize
+  - favoriteBrand
 
 ## Route : /user/delete/:id (delete specific user by his id)
 
@@ -74,14 +84,14 @@
 - Method: PUT
 - Body Parameters :
   - userId
-  - skanId
-  -
+  - pictureId
+  
 ## Route : /user/unlikePicture (to unlike a skan)
 
 - Method: PUT
 - Body Parameters :
   - userId
-  - skanId
+  - pictureId
 
 # 🤳 SKANS
 
@@ -115,7 +125,7 @@
 - Body Parameters :
   - userId
   - skanId
-  - 
+  
 ## Route : /user/unlikeSkan (to unlike a skan)
 
 - Method: PUT
