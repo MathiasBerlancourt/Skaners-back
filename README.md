@@ -1,15 +1,15 @@
-# skaners-back
+# 👟 skaners-back 
 
--------------- AUTHENTIFICATION --------------
+# 🔐 AUTHENTIFICATION 
 
-Route : /signin
+## Route : /signin
 
 - Method: POST
 - Body Parameters :
   - email
   - password
 
-Route : /signup
+## Route : /signup
 
 - Method: POST
 - Body Parameters :
@@ -17,13 +17,13 @@ Route : /signup
   - email
   - password
 
--------------- USER --------------
+# 👨‍💻 USER 
 
-Route : /user/info/:id (information of specific user)
+## Route : /user/info/:id (information of specific user)
 
 - Method: GET
 
-Route : /user/update/:id (update specific user by his id)
+## Route : /user/update/:id (update specific user by his id)
 
 - Method: PUT
 - Body Parameters :
@@ -31,13 +31,13 @@ Route : /user/update/:id (update specific user by his id)
   - email
   - pictureUrl
 
-Route : /user/delete/:id (delete specific user by his id)
+## Route : /user/delete/:id (delete specific user by his id)
 
 - Method: DELETE
 
--------------- SNEAKERS --------------
+# 👟 SNEAKERS 
 
-Route : /sneakers?name=&brand&price=&color (list of available sneakers)
+## Route : /sneakers?name=&brand&price=&color (list of available sneakers)
 
 - Method: GET
 - Query Parameters :
@@ -45,51 +45,51 @@ Route : /sneakers?name=&brand&price=&color (list of available sneakers)
   - brand
   - color
 
-Route : /sneakers/:id (specific sneaker by his id)
+## Route : /sneakers/:id (specific sneaker by his id)
 
 - Method: GET
 
-Route : /user/likeSneaker
+## Route : /user/likeSneaker
 
 - Method: PUT
 - Body Parameters :
   - userId
   - sneakerId
 
-Route : /user/unlikeSneaker
+## Route : /user/unlikeSneaker
 
 - Method: PUT
 - Body Parameters :
   - userId
   - sneakerId
 
--------------- PICTURES --------------
+# 🏞️ PICTURES
 
-Route : /pictures
+## Route : /pictures
 
 - Method: GET (list of pictures of lifestyle sneakers like Pinterest)
 
-Route : /user/likePicture (to like a skan)
+## Route : /user/likePicture (to like a skan)
 
 - Method: PUT
 - Body Parameters :
   - userId
   - skanId
   -
-Route : /user/unlikePicture (to unlike a skan)
+## Route : /user/unlikePicture (to unlike a skan)
 
 - Method: PUT
 - Body Parameters :
   - userId
   - skanId
 
--------------- SKANS --------------
+# 🤳 SKANS
 
-Route : /allSkans (list of available skans)
+## Route : /allSkans (list of available skans)
 
 - Method: GET
 
-Route : /checkSkan (to check a skan)
+## Route : /checkSkan (to check a skan)
 
 - Method: PUT
 - Body Parameters :
@@ -98,25 +98,25 @@ Route : /checkSkan (to check a skan)
   - description
   - linkUrl
 
-Route : /deleteSkan/:id (delete a skan)
+## Route : /deleteSkan/:id (delete a skan)
 
 - Method: DELETE
 
-Route : /user/addSkan (to make a skan request)
+## Route : /user/addSkan (to make a skan request)
 
 - Method: POST
 - Body Parameters :
   - picture
   - userId
 
-Route : /user/likeSkan (to like a skan)
+## Route : /user/likeSkan (to like a skan)
 
 - Method: PUT
 - Body Parameters :
   - userId
   - skanId
   - 
-Route : /user/unlikeSkan (to unlike a skan)
+## Route : /user/unlikeSkan (to unlike a skan)
 
 - Method: PUT
 - Body Parameters :
