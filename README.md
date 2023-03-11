@@ -132,3 +132,11 @@
 - Body Parameters :
   - userId
   - skanId
+
+## Made with express , Mongo DB & Forest Admin by 
+
+
+[@Louilallier](https://github.com/Louilallier)
+[@moustaphadiakhaby](https://github.com/moustaphadiakhaby)
+[@MaxenceValvason](https://github.com/MaxenceValvason)
+[@MathiasBerlancourt](https://github.com/MathiasBerlancourt)
